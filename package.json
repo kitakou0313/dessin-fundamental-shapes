@@ -1,0 +1,23 @@
+{
+  "name": "dessin-fundamental-shapes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kitakou0313/dessin-fundamental-shapes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kitakou0313/dessin-fundamental-shapes/issues"
+  },
+  "homepage": "https://github.com/kitakou0313/dessin-fundamental-shapes#readme",
+  "devDependencies": {
+    "@types/three": "^0.144.0",
+    "three": "^0.145.0"
+  }
+}
