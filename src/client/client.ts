@@ -1,5 +1,6 @@
 import * as THREE from "three"
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls"
+import Stats from "three/examples/jsm/libs/stats.module";
 
 const scene = new THREE.Scene();
 
@@ -31,6 +32,20 @@ function render() {
     renderer.render(scene, camera)
 }
 
+const stats = Stats()
+document.body.appendChild(stats.dom)
+
+function animate() {
+    requestAnimationFrame(animate)
+
+    cube.rotation.x += 0.01
+    cube.rotation.y += 0.01
+
+    render()
+
+    stats.update()
+}
+
 window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight
@@ -39,4 +54,4 @@ function onWindowResize() {
     render()
 }
 
-render()
+animate()
