@@ -6,8 +6,12 @@ import { GUI } from 'dat.gui'
 const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
 
-const light = new THREE.AmbientLight()
+const light = new THREE.DirectionalLight()
 scene.add(light)
+
+const lightHelper = new THREE.DirectionalLightHelper(light)
+scene.add(lightHelper)
+
 
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -89,8 +93,11 @@ lightFolder.addColor(data, 'color').onChange(() => {
 })
 lightFolder.add(light, 'intensity', 0, 1, 0.01)
 
-const ambientLightFolder = gui.addFolder('THREE.AmbientLight')
-ambientLightFolder.open()
+const directionalLightFolder = gui.addFolder('THREE.DirectionalLight')
+directionalLightFolder.add(light.position, "x", -100, 100, 0.01)
+directionalLightFolder.add(light.position, "y", -100, 100, 0.01)
+directionalLightFolder.add(light.position, "z", -100, 100, 0.01)
+directionalLightFolder.open()
 
 const meshesFolder = gui.addFolder('Meshes')
 meshesFolder.add(data, 'mapsEnabled').onChange(() => {
