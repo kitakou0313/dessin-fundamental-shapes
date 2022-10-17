@@ -6,10 +6,10 @@ import { GUI } from 'dat.gui'
 const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
 
-const light = new THREE.DirectionalLight()
+const light = new THREE.HemisphereLight()
 scene.add(light)
 
-const lightHelper = new THREE.DirectionalLightHelper(light)
+const lightHelper = new THREE.HemisphereLightHelper(light, 3)
 scene.add(lightHelper)
 
 
@@ -93,11 +93,11 @@ lightFolder.addColor(data, 'color').onChange(() => {
 })
 lightFolder.add(light, 'intensity', 0, 1, 0.01)
 
-const directionalLightFolder = gui.addFolder('THREE.DirectionalLight')
-directionalLightFolder.add(light.position, "x", -100, 100, 0.01)
-directionalLightFolder.add(light.position, "y", -100, 100, 0.01)
-directionalLightFolder.add(light.position, "z", -100, 100, 0.01)
-directionalLightFolder.open()
+const hemisphereLightFolder = gui.addFolder('THREE.HemisphereLight')
+hemisphereLightFolder.add(light.position, "x", -100, 100, 0.01)
+hemisphereLightFolder.add(light.position, "y", -100, 100, 0.01)
+hemisphereLightFolder.add(light.position, "z", -100, 100, 0.01)
+hemisphereLightFolder.open()
 
 const meshesFolder = gui.addFolder('Meshes')
 meshesFolder.add(data, 'mapsEnabled').onChange(() => {
