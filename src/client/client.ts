@@ -7,11 +7,15 @@ const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
 
 const light = new THREE.SpotLight()
+light.castShadow = true
+light.shadow.mapSize.width = 512
+light.shadow.mapSize.height = 512
+light.shadow.camera.near = 0.5
+light.shadow.camera.far = 100
 scene.add(light)
 
-const lightHelper = new THREE.SpotLightHelper(light)
-scene.add(lightHelper)
-
+const helper = new THREE.CameraHelper(light.shadow.camera)
+scene.add(helper)
 
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -23,6 +27,11 @@ camera.position.z = 7
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFShadowMap
+//renderer.shadowMap.type = THREE.BasicShadowMap
+//renderer.shadowMap.type = THREE.PCFShadowMap
+//renderer.shadowMap.type = THREE.VSMShadowMap
 document.body.appendChild(renderer.domElement)
 
 new OrbitControls(camera, renderer.domElement)
@@ -69,6 +78,8 @@ torus[3].position.x = 4
 torus[4].position.x = 8
 
 for (const torusElement of torus) {
+    torusElement.castShadow = true
+    torusElement.receiveShadow = true
     scene.add(torusElement)
 }
 
@@ -87,9 +98,11 @@ window.addEventListener('resize', onWindowResize, false)
 const stats = Stats()
 document.body.appendChild(stats.dom)
 
-const data = {
+const data  = {
     color: light.color.getHex(),
-    mapsEnabled: true
+    mapsEnabled: true,
+    shadowMapSizeWidth: 512,
+    shadowMapSizeHeight: 512,
 }
 
 const gui = new GUI()
@@ -109,6 +122,12 @@ spotLightFolder.add(light.position, 'y', -50, 50, 0.01)
 spotLightFolder.add(light.position, 'z', -50, 50, 0.01)
 spotLightFolder.open()
 
+function updateShadowMapSize() {
+    light.shadow.mapSize.width = data.shadowMapSizeWidth
+    light.shadow.mapSize.height = data.shadowMapSizeHeight
+    ;(light.shadow.map as any) = null
+}
+
 const meshesFolder = gui.addFolder('Meshes')
 meshesFolder.add(data, 'mapsEnabled').onChange(() => {
     material.forEach((m) => {
@@ -124,7 +143,7 @@ meshesFolder.add(data, 'mapsEnabled').onChange(() => {
 function animate() {
     requestAnimationFrame(animate)
 
-    lightHelper.update()
+    helper.update()
 
     torus.forEach((t) => {
         t.rotation.y += 0.01
