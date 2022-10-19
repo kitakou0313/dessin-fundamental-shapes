@@ -46,15 +46,11 @@ const torusGeometry = [
     new THREE.TorusGeometry(),
     new THREE.TorusGeometry(),
     new THREE.TorusGeometry(),
-    new THREE.TorusGeometry(),
-    new THREE.TorusGeometry()
 ]
 
 const material = [
     new THREE.MeshBasicMaterial(),
     new THREE.MeshLambertMaterial(),
-    new THREE.MeshPhongMaterial(),
-    new THREE.MeshPhysicalMaterial(),
     new THREE.MeshToonMaterial()
 ]
 
@@ -62,8 +58,6 @@ const torus = [
     new THREE.Mesh(torusGeometry[0], material[0]),
     new THREE.Mesh(torusGeometry[1], material[1]),
     new THREE.Mesh(torusGeometry[2], material[2]),
-    new THREE.Mesh(torusGeometry[3], material[3]),
-    new THREE.Mesh(torusGeometry[4], material[4]),
 ]
 
 const texture = new THREE.TextureLoader().load("img/grid.png")
@@ -74,8 +68,6 @@ for (const materialElement of material) {
 torus[0].position.x = -8
 torus[1].position.x = -4
 torus[2].position.x = 0
-torus[3].position.x = 4
-torus[4].position.x = 8
 
 for (const torusElement of torus) {
     torusElement.castShadow = true
