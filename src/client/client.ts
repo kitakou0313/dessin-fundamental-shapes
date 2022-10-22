@@ -34,6 +34,8 @@ const cubes = [
 cubes[0].position.x = 0
 cubes.forEach((c) => scene.add(c))
 
+const orbit_controls = new OrbitControls(camera, renderer.domElement);
+
 const transform_controls = new TransformControls(camera, renderer.domElement)
 transform_controls.attach(cubes[0])
 scene.add(transform_controls)
@@ -49,11 +51,12 @@ window.addEventListener("keydown", (event) => {
         case "KeyS":
             transform_controls.setMode("scale")
             break
+        case "KeyO":
+            orbit_controls.enabled = !orbit_controls.enabled
+            break
     }
 })
 
-const orbit_controls = new OrbitControls(camera, renderer.domElement);
-// 二つ同時に使うと相互に干渉して操作できない
 
 const stats = Stats()
 document.body.appendChild(stats.dom)
