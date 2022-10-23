@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { TransformControls } from "three/examples/jsm/controls/TransformControls";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { DragControls } from "three/examples/jsm/controls/DragControls";
 import  Stats from "three/examples/jsm/libs/stats.module";
 
 const scene = new THREE.Scene();
@@ -22,41 +23,45 @@ const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
-const geometry = new THREE.BoxGeometry()
+const box_geometry = new THREE.BoxGeometry()
+const tube_geometry = new THREE.TubeGeometry();
+const sphere_geometry = new THREE.SphereGeometry()
 
-const material = [
+const geometries = [
+    new THREE.BoxGeometry(),
+    new THREE.ConeGeometry(),
+    new THREE.SphereGeometry()
+]
+
+const materials = [
+    new THREE.MeshPhongMaterial({ color: 0xff0000, transparent: true }),
+    new THREE.MeshPhongMaterial({ color: 0xff0000, transparent: true }),
     new THREE.MeshPhongMaterial({ color: 0xff0000, transparent: true }),
 ]
 
-const cubes = [
-    new THREE.Mesh(geometry, material[0]),
+const objects = [
+    new THREE.Mesh(geometries[0], materials[0]),
+    new THREE.Mesh(geometries[1], materials[1]),
+    new THREE.Mesh(geometries[2], materials[2]),
 ]
-cubes[0].position.x = 0
-cubes.forEach((c) => scene.add(c))
+
+objects[0].position.x = -2
+objects[1].position.x = 0
+objects[2].position.x = 2
+
+objects.forEach((c) => scene.add(c))
 
 const orbit_controls = new OrbitControls(camera, renderer.domElement);
-
-const transform_controls = new TransformControls(camera, renderer.domElement)
-transform_controls.attach(cubes[0])
-scene.add(transform_controls)
+const drag_controls = new DragControls(objects, camera, renderer.domElement)
 
 orbit_controls.enabled = true
-transform_controls.enabled = false
+drag_controls.enabled = false
 
 window.addEventListener("keydown", (event) => {
     switch (event.code) {
-        case "KeyT":
-            transform_controls.setMode("translate")
-            break;
-        case "KeyR":
-            transform_controls.setMode("rotate")
-            break
-        case "KeyS":
-            transform_controls.setMode("scale")
-            break
         case "KeyC":
             orbit_controls.enabled = !orbit_controls.enabled
-            transform_controls.enabled = !transform_controls.enabled
+            drag_controls.enabled = !drag_controls.enabled
             break
     }
 })
