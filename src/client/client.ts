@@ -8,8 +8,11 @@ const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
 
 const light = new THREE.PointLight()
-light.position.set(10,10,10)
+light.position.set(2,2,2)
 scene.add(light)
+
+const point_light_helper = new THREE.PointLightHelper(light);
+scene.add(point_light_helper)
 
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -34,15 +37,16 @@ const geometries = [
 ]
 
 const materials = [
-    new THREE.MeshPhongMaterial({ color: 0xff0000, transparent: true }),
-    new THREE.MeshPhongMaterial({ color: 0xff0000, transparent: true }),
-    new THREE.MeshPhongMaterial({ color: 0xff0000, transparent: true }),
+    new THREE.MeshStandardMaterial({ color: 0xff0000, transparent: true }),
+    new THREE.MeshStandardMaterial({ color: 0xff0000, transparent: true }),
+    new THREE.MeshStandardMaterial({ color: 0xff0000, transparent: true }),
 ]
 
 const objects = [
     new THREE.Mesh(geometries[0], materials[0]),
     new THREE.Mesh(geometries[1], materials[1]),
     new THREE.Mesh(geometries[2], materials[2]),
+    light
 ]
 
 objects[0].position.x = -2
@@ -86,6 +90,8 @@ function animate() {
     requestAnimationFrame(animate)
 
     render()
+
+    point_light_helper.update()
 
     stats.update()
 }
