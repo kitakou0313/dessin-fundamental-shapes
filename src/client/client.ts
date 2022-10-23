@@ -3,15 +3,20 @@ import { TransformControls } from "three/examples/jsm/controls/TransformControls
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DragControls } from "three/examples/jsm/controls/DragControls";
 import  Stats from "three/examples/jsm/libs/stats.module";
+import { AmbientLight } from "three";
 
 const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
 
-const light = new THREE.PointLight()
+const light = new THREE.DirectionalLight()
 light.position.set(2,2,2)
 scene.add(light)
 
-const point_light_helper = new THREE.PointLightHelper(light);
+const ambient_light = new THREE.AmbientLight()
+ambient_light.intensity = 0.5
+scene.add(ambient_light)
+
+const point_light_helper = new THREE.DirectionalLightHelper(light);
 scene.add(point_light_helper)
 
 const camera = new THREE.PerspectiveCamera(
@@ -31,9 +36,9 @@ const tube_geometry = new THREE.TubeGeometry();
 const sphere_geometry = new THREE.SphereGeometry()
 
 const geometries = [
+    new THREE.SphereGeometry(),
     new THREE.BoxGeometry(),
-    new THREE.ConeGeometry(),
-    new THREE.SphereGeometry()
+    new THREE.CylinderGeometry()
 ]
 
 const materials = [
@@ -53,7 +58,16 @@ objects[0].position.x = -2
 objects[1].position.x = 0
 objects[2].position.x = 2
 
-objects.forEach((c) => scene.add(c))
+function gen_random_rotation() {
+    return Math.random() * Math.PI
+}
+
+objects.forEach((o) => {
+    o.rotateX(gen_random_rotation())
+    o.rotateY(gen_random_rotation())
+    o.rotateZ(gen_random_rotation())
+})
+objects.forEach((o) => scene.add(o))
 
 const orbit_controls = new OrbitControls(camera, renderer.domElement);
 const drag_controls = new DragControls(objects, camera, renderer.domElement)
