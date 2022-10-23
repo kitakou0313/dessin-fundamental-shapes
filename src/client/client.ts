@@ -55,13 +55,8 @@ window.addEventListener("keydown", (event) => {
             transform_controls.setMode("scale")
             break
         case "KeyC":
-            console.log("Pressed C")
             orbit_controls.enabled = !orbit_controls.enabled
             transform_controls.enabled = !transform_controls.enabled
-
-            console.log(orbit_controls.enabled)
-            console.log(transform_controls.enabled)
-
             break
     }
 })
