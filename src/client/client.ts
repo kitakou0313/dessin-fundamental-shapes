@@ -40,9 +40,12 @@ const transform_controls = new TransformControls(camera, renderer.domElement)
 transform_controls.attach(cubes[0])
 scene.add(transform_controls)
 
+orbit_controls.enabled = true
+transform_controls.enabled = false
+
 window.addEventListener("keydown", (event) => {
     switch (event.code) {
-        case "KeyG":
+        case "KeyT":
             transform_controls.setMode("translate")
             break;
         case "KeyR":
@@ -51,8 +54,14 @@ window.addEventListener("keydown", (event) => {
         case "KeyS":
             transform_controls.setMode("scale")
             break
-        case "KeyO":
+        case "KeyC":
+            console.log("Pressed C")
             orbit_controls.enabled = !orbit_controls.enabled
+            transform_controls.enabled = !transform_controls.enabled
+
+            console.log(orbit_controls.enabled)
+            console.log(transform_controls.enabled)
+
             break
     }
 })
