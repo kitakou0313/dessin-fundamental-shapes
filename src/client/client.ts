@@ -13,7 +13,7 @@ light.position.set(2,2,2)
 scene.add(light)
 
 const ambient_light = new THREE.AmbientLight()
-ambient_light.intensity = 0.5
+ambient_light.intensity = 0.3
 scene.add(ambient_light)
 
 const point_light_helper = new THREE.DirectionalLightHelper(light);
@@ -29,6 +29,7 @@ camera.position.z = 3
 
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.setClearColor(0xffffff)
 document.body.appendChild(renderer.domElement)
 
 const box_geometry = new THREE.BoxGeometry()
