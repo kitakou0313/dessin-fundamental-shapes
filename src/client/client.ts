@@ -29,7 +29,7 @@ camera.position.z = 3
 
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.setClearColor(0xffffff)
+renderer.setClearColor(0x88C0F1)
 document.body.appendChild(renderer.domElement)
 
 const box_geometry = new THREE.BoxGeometry()
