@@ -1,9 +1,7 @@
 import * as THREE from "three";
-import { TransformControls } from "three/examples/jsm/controls/TransformControls";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DragControls } from "three/examples/jsm/controls/DragControls";
 import  Stats from "three/examples/jsm/libs/stats.module";
-import { AmbientLight } from "three";
 
 const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
