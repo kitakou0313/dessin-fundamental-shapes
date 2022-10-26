@@ -30,10 +30,6 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setClearColor(0x88C0F1)
 document.body.appendChild(renderer.domElement)
 
-const box_geometry = new THREE.BoxGeometry()
-const tube_geometry = new THREE.TubeGeometry();
-const sphere_geometry = new THREE.SphereGeometry()
-
 const geometries = [
     new THREE.SphereGeometry(),
     new THREE.BoxGeometry(),
