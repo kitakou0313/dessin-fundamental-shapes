@@ -54,7 +54,7 @@ objects[1].position.x = 0
 objects[2].position.x = 2
 
 function gen_random_rotation() {
-    return Math.random() * Math.PI
+    return Math.random() * Math.PI*2
 }
 
 objects.forEach((o) => {
