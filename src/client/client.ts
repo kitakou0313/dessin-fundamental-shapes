@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { DragControls } from "three/examples/jsm/controls/DragControls";
 import  Stats from "three/examples/jsm/libs/stats.module";
 
 const scene = new THREE.Scene();
@@ -49,6 +48,21 @@ const objects = [
     light
 ]
 
+var sphere_geo = new THREE.EdgesGeometry( geometries[0] );
+var cube_geo = new THREE.EdgesGeometry( geometries[1] );
+var cylinder_geo = new THREE.EdgesGeometry( geometries[2] );
+
+
+var line_mat = new THREE.LineBasicMaterial( { color: 0x00ff00, linewidth: 100 } );
+
+var sphere_wireframe = new THREE.LineSegments( sphere_geo, line_mat );
+var cube_wireframe = new THREE.LineSegments( cube_geo, line_mat );
+var cylinder_wireframe = new THREE.LineSegments( cylinder_geo, line_mat );
+
+objects[0].add( sphere_wireframe );
+objects[1].add( cube_wireframe );
+objects[2].add( cylinder_wireframe );
+
 objects[0].position.x = -2
 objects[1].position.x = 0
 objects[2].position.x = 2
@@ -65,20 +79,8 @@ objects.forEach((o) => {
 objects.forEach((o) => scene.add(o))
 
 const orbit_controls = new OrbitControls(camera, renderer.domElement);
-const drag_controls = new DragControls(objects, camera, renderer.domElement)
 
 orbit_controls.enabled = true
-drag_controls.enabled = false
-
-window.addEventListener("keydown", (event) => {
-    switch (event.code) {
-        case "KeyC":
-            orbit_controls.enabled = !orbit_controls.enabled
-            drag_controls.enabled = !drag_controls.enabled
-            break
-    }
-})
-
 
 const stats = Stats()
 document.body.appendChild(stats.dom)
