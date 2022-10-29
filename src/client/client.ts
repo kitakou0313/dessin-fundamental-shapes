@@ -89,6 +89,18 @@ function render() {
     renderer.render(scene, camera)
 }
 
+window.addEventListener("keydown", (event) => {
+    switch (event.code) {
+        case "KeyR":
+            objects.forEach((o) => {
+                o.rotateX(gen_random_rotation())
+                o.rotateY(gen_random_rotation())
+                o.rotateZ(gen_random_rotation())
+            })
+            break
+    }
+})
+
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
