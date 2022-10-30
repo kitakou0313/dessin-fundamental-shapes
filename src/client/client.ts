@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import  Stats from "three/examples/jsm/libs/stats.module";
+import { GUI } from 'dat.gui'
 
 const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
@@ -84,6 +85,23 @@ orbit_controls.enabled = true
 
 const stats = Stats()
 document.body.appendChild(stats.dom)
+
+const data = {
+    color: light.color.getHex(),
+    mapsEnabled: true,
+}
+
+const gui = new GUI()
+const lightFolder = gui.addFolder('Light')
+lightFolder.addColor(data, 'color').onChange(() => {
+    light.color.setHex(Number(data.color.toString().replace('#', '0x')))
+})
+lightFolder.add(light, 'intensity', 0, 1, 0.01)
+
+lightFolder.add(light.position, "x", -100, 100, 0.01)
+lightFolder.add(light.position, "y", -100, 100, 0.01)
+lightFolder.add(light.position, "z", -100, 100, 0.01)
+lightFolder.open()
 
 function render() {
     renderer.render(scene, camera)
