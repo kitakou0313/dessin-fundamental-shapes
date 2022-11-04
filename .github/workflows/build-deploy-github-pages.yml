@@ -16,6 +16,4 @@ jobs:
           node-version: '18.10.0'
       - run: node --version
       - run: npm install
-        working-directory: app
-      - run: npm run build 
-        working-directory: app
+      - run: npm run build
