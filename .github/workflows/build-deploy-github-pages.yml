@@ -23,7 +23,7 @@ jobs:
           path: dist/client
 
   deploy-to-pages:
-    needs: build
+    needs: build-upload-artifacts
     runs-on: ubuntu-latest
 
     permissions:
