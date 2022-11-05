@@ -1,41 +1,41 @@
-name: build-deploy-to-github-pages
+# name: build-deploy-to-github-pages
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
 
-jobs:
-  build-upload-artifacts:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18.10.0'
-      - run: node --version
-      - run: npm install
-      - run: npm run build
-      - name: upload-arifacts
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: dist/client
+# jobs:
+#   build-upload-artifacts:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: '18.10.0'
+#       - run: node --version
+#       - run: npm install
+#       - run: npm run build
+#       - name: upload-arifacts
+#         uses: actions/upload-pages-artifact@v1
+#         with:
+#           path: dist/client
 
-  deploy-to-pages:
-    needs: build-upload-artifacts
-    runs-on: ubuntu-latest
+#   deploy-to-pages:
+#     needs: build-upload-artifacts
+#     runs-on: ubuntu-latest
 
-    permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+#     permissions:
+#       pages: write      # to deploy to Pages
+#       id-token: write   # to verify the deployment originates from an appropriate source
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
 
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+#     steps:
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v1
 
