@@ -80,7 +80,11 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+dist/*
+# Except index.html
+!dist/client/
+dist/client/*
+!dist/client/index.html
 
 # Gatsby files
 .cache/
