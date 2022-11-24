@@ -91,6 +91,16 @@ const data = {
     mapsEnabled: true,
 }
 
+const param = {
+    "rotate": () => {
+        objects.forEach((o) => {
+            o.rotateX(gen_random_rotation())
+            o.rotateY(gen_random_rotation())
+            o.rotateZ(gen_random_rotation())
+        })
+    }
+}
+
 const gui = new GUI()
 const lightFolder = gui.addFolder('Light')
 lightFolder.addColor(data, 'color').onChange(() => {
@@ -102,6 +112,10 @@ lightFolder.add(light.position, "x", -100, 100, 0.01)
 lightFolder.add(light.position, "y", -100, 100, 0.01)
 lightFolder.add(light.position, "z", -100, 100, 0.01)
 lightFolder.open()
+
+const objectFolder = gui.addFolder('Object')
+objectFolder.add(param, "rotate")
+objectFolder.open()
 
 function render() {
     renderer.render(scene, camera)
