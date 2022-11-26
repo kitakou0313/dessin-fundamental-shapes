@@ -33,7 +33,7 @@ document.body.appendChild(renderer.domElement)
 const geometries = [
     new THREE.SphereGeometry(),
     new THREE.BoxGeometry(),
-    new THREE.CylinderGeometry()
+    new THREE.CylinderGeometry(0.4, 0.4, 1, 20)
 ]
 
 const materials = [
