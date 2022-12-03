@@ -1,7 +1,8 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { MapControls } from "three/examples/jsm/controls/OrbitControls";
 import  Stats from "three/examples/jsm/libs/stats.module";
 import { GUI } from 'dat.gui'
+import { mapLinear } from "three/src/math/MathUtils";
 
 const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
@@ -79,9 +80,9 @@ objects.forEach((o) => {
 })
 objects.forEach((o) => scene.add(o))
 
-const orbit_controls = new OrbitControls(camera, renderer.domElement);
+const controls = new MapControls(camera, renderer.domElement);
 
-orbit_controls.enabled = true
+controls.enabled = true
 
 const stats = Stats()
 document.body.appendChild(stats.dom)
