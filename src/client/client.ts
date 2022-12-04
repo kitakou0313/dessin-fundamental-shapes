@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { MapControls } from "three/examples/jsm/controls/OrbitControls";
 import  Stats from "three/examples/jsm/libs/stats.module";
 import { GUI } from 'dat.gui'
-import { mapLinear } from "three/src/math/MathUtils";
 
 const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5))
@@ -38,8 +37,8 @@ const geometries = [
 ]
 
 const materials = [
-    new THREE.MeshStandardMaterial({ color: 0xff0000, transparent: true }),
-    new THREE.MeshStandardMaterial({ color: 0xff0000, transparent: true }),
+    new THREE.MeshPhysicalMaterial({ color: 0xff0000, transparent: true }),
+    new THREE.MeshPhysicalMaterial({ color: 0xff0000, transparent: true }),
     new THREE.MeshStandardMaterial({ color: 0xff0000, transparent: true }),
 ]
 
