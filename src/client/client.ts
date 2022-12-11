@@ -25,8 +25,10 @@ const perspective_camera = new THREE.PerspectiveCamera(
 )
 perspective_camera.position.z = 3
 
+
+var aspect_ratio = window.innerWidth / window.innerHeight
 const orthographic_camera = new THREE.OrthographicCamera(
-    -1, 1, 1, -1, 0.1, 10
+    window.innerWidth/-2, window.innerWidth/2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 1000
 )
 orthographic_camera.position.z = 3
 
@@ -37,8 +39,12 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setClearColor(0x88C0F1)
 document.body.appendChild(renderer.domElement)
 
-const controls = new MapControls(camera, renderer.domElement);
-controls.enabled = true
+const persupective_controls = new MapControls(perspective_camera, renderer.domElement);
+persupective_controls.enabled = true
+
+const orthogonal_controls = new MapControls(orthographic_camera, renderer.domElement);
+orthogonal_controls.enabled = true
+
 
 const geometries = [
     new THREE.SphereGeometry(),
@@ -104,6 +110,9 @@ const param = {
             o.rotateY(gen_random_rotation())
             o.rotateZ(gen_random_rotation())
         })
+    },
+    "change_cam":() => {
+        camera = camera == perspective_camera ? orthographic_camera :perspective_camera
     }
 }
 
@@ -122,6 +131,10 @@ lightFolder.open()
 const objectFolder = gui.addFolder('Object')
 objectFolder.add(param, "rotate")
 objectFolder.open()
+
+const camereFolder = gui.addFolder("Camera")
+camereFolder.add(param, "change_cam")
+camereFolder.open()
 
 function render() {
     renderer.render(scene, camera)
