@@ -152,13 +152,25 @@ window.addEventListener("keydown", (event) => {
     }
 })
 
-// function onWindowResize() {
-//     camera.aspect = window.innerWidth / window.innerHeight
-//     camera.updateProjectionMatrix()
-//     renderer.setSize(window.innerWidth, window.innerHeight)
-//     render()
-// }
-// window.addEventListener('resize', onWindowResize, false)
+function fitPerspectiveCameraParamOnWindow() {
+    perspective_camera.aspect = window.innerWidth / window.innerHeight
+    perspective_camera.updateProjectionMatrix()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    render()
+}
+
+function fitOrthographicCameraParamOnWindow() {
+    console.log("Not Implemeted!")
+}
+
+function onWindowResize() {
+    if (camera == perspective_camera) {
+        fitPerspectiveCameraParamOnWindow()
+    }else if (camera == orthographic_camera){
+        fitOrthographicCameraParamOnWindow()
+    }
+}
+window.addEventListener('resize', onWindowResize, false)
 
 function animate() {
     requestAnimationFrame(animate)
