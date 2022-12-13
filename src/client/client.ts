@@ -28,8 +28,10 @@ perspective_camera.position.z = 3
 
 var aspect_ratio = window.innerWidth / window.innerHeight
 const orthographic_camera = new THREE.OrthographicCamera(
-    window.innerWidth/-2, window.innerWidth/2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 1000
-)
+    -window.innerWidth/2,
+    window.innerWidth/2,
+    window.innerHeight/2,
+    -window.innerHeight/2, 0, 2000)
 orthographic_camera.position.z = 3
 
 var camera:THREE.Camera = perspective_camera
@@ -113,6 +115,13 @@ const param = {
     },
     "change_cam":() => {
         camera = camera == perspective_camera ? orthographic_camera :perspective_camera
+        if (camera == orthographic_camera){
+            orthogonal_controls.enabled = true
+            persupective_controls.enabled = false
+        }else if (camera == perspective_camera){
+            persupective_controls.enabled = true
+            orthogonal_controls.enabled = false
+        }
     }
 }
 
@@ -160,7 +169,14 @@ function fitPerspectiveCameraParamOnWindow() {
 }
 
 function fitOrthographicCameraParamOnWindow() {
-    console.log("Not Implemeted!")
+    orthographic_camera.left = -window.innerWidth / 2.0;
+    orthographic_camera.right = window.innerWidth / 2.0;
+    orthographic_camera.top = window.innerHeight /2.0;
+    orthographic_camera.bottom = -window.innerHeight /2.0;
+
+    orthographic_camera.updateProjectionMatrix()
+    renderer.setSize(window.innerWidth, innerHeight)
+    render()
 }
 
 function onWindowResize() {
