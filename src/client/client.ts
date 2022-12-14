@@ -33,6 +33,7 @@ const orthographic_camera = new THREE.OrthographicCamera(
     window.innerHeight/2,
     -window.innerHeight/2, 0, 2000)
 orthographic_camera.position.z = 3
+orthographic_camera.zoom = 150
 
 var camera:THREE.Camera = perspective_camera
 
