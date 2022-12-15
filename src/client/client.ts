@@ -123,6 +123,14 @@ const param = {
             persupective_controls.enabled = true
             orthogonal_controls.enabled = false
         }
+    },
+    "sync_camera_pos":() => {
+        var current_camera = camera
+        var another_camera = camera == perspective_camera ? perspective_camera :orthographic_camera
+
+        another_camera.position.setX(current_camera.position.x)
+        another_camera.position.setY(current_camera.position.y)
+        another_camera.position.setZ(current_camera.position.z)
     }
 }
 
@@ -144,6 +152,7 @@ objectFolder.open()
 
 const camereFolder = gui.addFolder("Camera")
 camereFolder.add(param, "change_cam")
+camereFolder.add(param, "sync_camera_pos")
 camereFolder.open()
 
 function render() {
