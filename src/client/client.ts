@@ -126,11 +126,14 @@ const param = {
     },
     "sync_camera_pos":() => {
         var current_camera = camera
-        var another_camera = camera == perspective_camera ? perspective_camera :orthographic_camera
+        var another_camera = current_camera == perspective_camera ? perspective_camera :orthographic_camera
 
-        another_camera.position.setX(current_camera.position.x)
-        another_camera.position.setY(current_camera.position.y)
-        another_camera.position.setZ(current_camera.position.z)
+        console.log("Before",another_camera.position)
+        another_camera.position.set(current_camera.position.x, current_camera.position.y,current_camera.position.z)
+        console.log("After",another_camera.position)
+
+        orthogonal_controls.update()
+        persupective_controls.update()
     }
 }
 
