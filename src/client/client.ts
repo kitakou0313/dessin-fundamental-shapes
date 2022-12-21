@@ -31,7 +31,7 @@ const orthographic_camera = new THREE.OrthographicCamera(
     -window.innerWidth/2,
     window.innerWidth/2,
     window.innerHeight/2,
-    -window.innerHeight/2, 0, 2000)
+    -window.innerHeight/2, 0.1, 1000)
 orthographic_camera.position.z = 3
 orthographic_camera.zoom = 150
 
