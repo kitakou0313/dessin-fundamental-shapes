@@ -128,9 +128,7 @@ const param = {
         var current_camera = camera
         var another_camera = current_camera == perspective_camera ? orthographic_camera : perspective_camera
 
-        console.log("Before",another_camera.position)
         another_camera.position.set(current_camera.position.x, current_camera.position.y,current_camera.position.z)
-        console.log("After",another_camera.position)
 
         orthogonal_controls.update()
         persupective_controls.update()
