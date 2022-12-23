@@ -102,8 +102,7 @@ const stats = Stats()
 document.body.appendChild(stats.dom)
 
 const data = {
-    color: light.color.getHex(),
-    mapsEnabled: true,
+    color: light.color.getHex()
 }
 
 const param = {
